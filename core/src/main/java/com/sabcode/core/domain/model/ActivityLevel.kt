@@ -1,4 +1,4 @@
-package com.sabcode.core.model
+package com.sabcode.core.domain.model
 
 sealed class ActivityLevel(val name: String) {
     object Low : ActivityLevel("low")

@@ -1,4 +1,4 @@
-package com.sabcode.core.model
+package com.sabcode.core.domain.model
 
 data class UserInfo(
     val gender: Gender,

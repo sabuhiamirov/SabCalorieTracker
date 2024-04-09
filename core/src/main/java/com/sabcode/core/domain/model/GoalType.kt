@@ -1,4 +1,4 @@
-package com.sabcode.core.model
+package com.sabcode.core.domain.model
 
 sealed class GoalType(val name: String) {
     object LoseWeight : GoalType("lose_weight")

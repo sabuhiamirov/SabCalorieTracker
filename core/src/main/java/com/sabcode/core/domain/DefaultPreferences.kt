@@ -1,11 +1,11 @@
-package com.sabcode.core
+package com.sabcode.core.domain
 
 import android.content.SharedPreferences
 import com.sabcode.core.domain.preferences.Preferences
-import com.sabcode.core.model.ActivityLevel
-import com.sabcode.core.model.Gender
-import com.sabcode.core.model.GoalType
-import com.sabcode.core.model.UserInfo
+import com.sabcode.core.domain.model.ActivityLevel
+import com.sabcode.core.domain.model.Gender
+import com.sabcode.core.domain.model.GoalType
+import com.sabcode.core.domain.model.UserInfo
 
 class DefaultPreferences(
     private val sharedPref: SharedPreferences
