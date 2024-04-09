@@ -1,4 +1,4 @@
-package com.sabcode.core.model
+package com.sabcode.core.domain.model
 
 sealed class Gender(val name: String) {
     object Male : Gender("male")

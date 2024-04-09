@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sabcode.core.domain.preferences.Preferences
-import com.sabcode.core.model.Gender
+import com.sabcode.core.domain.model.Gender
 import com.sabcode.core.navigation.Route
 import com.sabcode.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
