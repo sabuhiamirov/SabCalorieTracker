@@ -34,7 +34,7 @@ class DefaultPreferences(
             .apply()
     }
 
-    override fun activityLevel(level: ActivityLevel) {
+    override fun saveActivityLevel(level: ActivityLevel) {
         sharedPref.edit()
             .putString(Preferences.KEY_ACTIVITY_LEVEL, level.name)
             .apply()

@@ -11,8 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sabcode.core.navigation.Route
+import com.sabcode.onboarding_presentation.activity.ActivityScreen
 import com.sabcode.onboarding_presentation.age.AgeScreen
 import com.sabcode.onboarding_presentation.gender.GenderScreen
+import com.sabcode.onboarding_presentation.goal.GoalScreen
 import com.sabcode.onboarding_presentation.height.HeightScreen
 import com.sabcode.onboarding_presentation.weight.WeightScreen
 import com.sabcode.onboarding_presentation.welcome.WelcomeScreen
@@ -68,10 +70,14 @@ class MainActivity : ComponentActivity() {
 
                         }
                         composable(Route.ACTIVITY) {
-
+                            ActivityScreen(
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.GOAL) {
-
+                            GoalScreen(
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.TRACKER_OVERVIEW) {
 
