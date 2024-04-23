@@ -13,6 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import com.sabcode.core.navigation.Route
 import com.sabcode.onboarding_presentation.age.AgeScreen
 import com.sabcode.onboarding_presentation.gender.GenderScreen
+import com.sabcode.onboarding_presentation.height.HeightScreen
+import com.sabcode.onboarding_presentation.weight.WeightScreen
 import com.sabcode.onboarding_presentation.welcome.WelcomeScreen
 import com.sabcode.sabcalorietracker.navigation.navigate
 import com.sabcode.sabcalorietracker.ui.theme.SabCalorieTrackerTheme
@@ -26,32 +28,41 @@ class MainActivity : ComponentActivity() {
             SabCalorieTrackerTheme {
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
-                Scaffold (
+                Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     scaffoldState = scaffoldState
-                ){
+                ) { paddingValue ->
                     NavHost(
                         navController = navController,
                         startDestination = Route.WELCOME
                     ) {
+                        val test = paddingValue
+
                         composable(Route.WELCOME) {
-                            WelcomeScreen (
+                            WelcomeScreen(
                                 onNavigate = navController::navigate
                             )
                         }
                         composable(Route.AGE) {
                             AgeScreen(
-                                scaffoldState =scaffoldState,
-                                onNavigate = navController::navigate)
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.GENDER) {
                             GenderScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.HEIGHT) {
-
+                            HeightScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.WEIGHT) {
-
+                            WeightScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.NUTRIENT_GOAL) {
 
