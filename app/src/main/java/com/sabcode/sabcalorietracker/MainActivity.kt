@@ -16,6 +16,7 @@ import com.sabcode.onboarding_presentation.age.AgeScreen
 import com.sabcode.onboarding_presentation.gender.GenderScreen
 import com.sabcode.onboarding_presentation.goal.GoalScreen
 import com.sabcode.onboarding_presentation.height.HeightScreen
+import com.sabcode.onboarding_presentation.nutrientGoal.NutrientGoalScreen
 import com.sabcode.onboarding_presentation.weight.WeightScreen
 import com.sabcode.onboarding_presentation.welcome.WelcomeScreen
 import com.sabcode.sabcalorietracker.navigation.navigate
@@ -67,7 +68,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(Route.NUTRIENT_GOAL) {
-
+                            NutrientGoalScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.ACTIVITY) {
                             ActivityScreen(
