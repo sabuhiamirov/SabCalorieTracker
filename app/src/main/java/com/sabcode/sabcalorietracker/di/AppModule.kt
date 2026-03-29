@@ -3,7 +3,7 @@ package com.sabcode.sabcalorietracker.di
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.sabcode.core.domain.DefaultPreferences
+import com.sabcode.core.data.preferences.DefaultPreferences
 import com.sabcode.core.domain.preferences.Preferences
 import com.sabcode.core.domain.usecase.FilterOutDigits
 import dagger.Module
