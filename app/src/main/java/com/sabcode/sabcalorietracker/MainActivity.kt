@@ -13,7 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.sabcode.core.navigation.Route
+import com.sabcode.core.domain.preferences.Preferences
+import com.sabcode.sabcalorietracker.navigation.Route
 import com.sabcode.onboarding_presentation.activity.ActivityScreen
 import com.sabcode.onboarding_presentation.age.AgeScreen
 import com.sabcode.onboarding_presentation.gender.GenderScreen
@@ -22,17 +23,23 @@ import com.sabcode.onboarding_presentation.height.HeightScreen
 import com.sabcode.onboarding_presentation.nutrientGoal.NutrientGoalScreen
 import com.sabcode.onboarding_presentation.weight.WeightScreen
 import com.sabcode.onboarding_presentation.welcome.WelcomeScreen
-import com.sabcode.sabcalorietracker.navigation.navigate
 import com.sabcode.sabcalorietracker.ui.theme.SabCalorieTrackerTheme
 import com.sabcode.tracker_presentation.search.SearchScreen
 import com.sabcode.tracker_presentation.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var preferences: Preferences
+
+
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val shouldShowOnboarding = preferences.loadShouldShowOnBoarding()
         setContent {
             SabCalorieTrackerTheme {
                 val navController = rememberNavController()
@@ -43,54 +50,79 @@ class MainActivity : ComponentActivity() {
                 ) { paddingValue ->
                     NavHost(
                         navController = navController,
-                        startDestination = Route.WELCOME
+                        startDestination = if (shouldShowOnboarding) {
+                            Route.WELCOME
+                        } else Route.TRACKER_OVERVIEW
                     ) {
                         val test = paddingValue
 
                         composable(Route.WELCOME) {
                             WelcomeScreen(
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.GENDER)
+                                }
                             )
                         }
                         composable(Route.AGE) {
                             AgeScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.HEIGHT)
+                                }
                             )
                         }
                         composable(Route.GENDER) {
-                            GenderScreen(onNavigate = navController::navigate)
+                            GenderScreen(onNextClick = {
+                                navController.navigate(Route.AGE)
+                            })
                         }
                         composable(Route.HEIGHT) {
                             HeightScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.WEIGHT)
+                                }
                             )
                         }
                         composable(Route.WEIGHT) {
                             WeightScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate
+                                onNextClick ={
+                                    navController.navigate(Route.ACTIVITY)
+                                }
                             )
                         }
                         composable(Route.NUTRIENT_GOAL) {
                             NutrientGoalScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.TRACKER_OVERVIEW)
+                                }
                             )
                         }
                         composable(Route.ACTIVITY) {
                             ActivityScreen(
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.GOAL)
+                                }
                             )
                         }
                         composable(Route.GOAL) {
                             GoalScreen(
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.NUTRIENT_GOAL)
+                                }
                             )
                         }
                         composable(Route.TRACKER_OVERVIEW) {
-                            TrackerOverviewScreen(onNavigate = navController::navigate)
+                            TrackerOverviewScreen(onNavigateToSearch = { mealName, dayOfMonth, month, year ->
+                                navController.navigate(
+                                    Route.SEARCH + "/$mealName"+
+                                            "/$dayOfMonth"+
+                                            "/$month"+
+                                            "/$year",
+                                )
+                            })
                         }
                         composable(
                             route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",

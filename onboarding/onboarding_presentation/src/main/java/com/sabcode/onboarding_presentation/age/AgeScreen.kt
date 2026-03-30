@@ -3,7 +3,6 @@ package com.sabcode.onboarding_presentation.age
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -20,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sabcode.core.R
 import com.sabcode.core.util.UiEvent
-import com.sabcode.core.util.UiText
 import com.sabcode.core_ui.LocalSpacing
 import com.sabcode.onboarding_presentation.components.ActionButton
 import com.sabcode.onboarding_presentation.components.UnitTextField
@@ -29,7 +27,7 @@ import com.sabcode.onboarding_presentation.components.UnitTextField
 @Composable
 fun AgeScreen(
     scaffoldState: ScaffoldState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: AgeViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
@@ -38,7 +36,7 @@ fun AgeScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message.asString(context)

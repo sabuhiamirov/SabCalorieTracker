@@ -1,4 +1,4 @@
-package com.sabcode.core.navigation
+package com.sabcode.sabcalorietracker.navigation
 
 object Route {
     const val WELCOME = "welcome"

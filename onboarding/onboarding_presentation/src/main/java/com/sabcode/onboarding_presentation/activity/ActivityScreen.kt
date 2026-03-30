@@ -18,19 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sabcode.core.util.UiEvent
 import com.sabcode.core_ui.LocalSpacing
 import com.sabcode.core.R
 import com.sabcode.core.domain.model.ActivityLevel
-import com.sabcode.core.domain.model.Gender
 import com.sabcode.onboarding_presentation.components.ActionButton
 import com.sabcode.onboarding_presentation.components.SelectableButton
 
 @Composable
 fun ActivityScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: ActivityViewModel = hiltViewModel()
 
 ) {
@@ -39,7 +37,7 @@ fun ActivityScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
 

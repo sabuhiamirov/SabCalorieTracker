@@ -11,12 +11,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.sabcode.core.R
-import com.sabcode.core.navigation.Route
 import com.sabcode.core.util.UiEvent
 import com.sabcode.core_ui.LocalSpacing
 import com.sabcode.onboarding_presentation.components.ActionButton
@@ -24,7 +21,7 @@ import com.sabcode.onboarding_presentation.components.ActionButton
 
 @Composable
 fun WelcomeScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit
+    onNextClick: () -> Unit
 ){
     val spacing = LocalSpacing.current
     Column (
@@ -44,7 +41,7 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
 
         ActionButton(text = stringResource(id = R.string.next), onClick = {
-              onNavigate(UiEvent.Navigate(Route.GENDER))
+              onNextClick()
         },
             modifier = Modifier.align(Alignment.CenterHorizontally)
 
