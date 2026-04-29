@@ -16,7 +16,7 @@ android {
         versionCode = ProjectConfig.versionCode
         versionName = ProjectConfig.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.sabcode.sabcalorietracker.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -47,6 +47,11 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+        }
+        jniLibs {
+            useLegacyPackaging = true
         }
     }
     hilt {
@@ -101,7 +106,6 @@ dependencies {
     testImplementation(Testing.composeUiTest)
     testImplementation(Testing.mockk)
     testImplementation(Testing.mockWebServer)
-
     androidTestImplementation(Testing.junit4)
     androidTestImplementation(Testing.junitAndroidExt)
     androidTestImplementation(Testing.truth)
